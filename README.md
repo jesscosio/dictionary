@@ -1,5 +1,5 @@
 # dictionary
-Clone project *(in a directory accessible to python module map, configured in .bash_profile)*  
+Clone project
 ```git clone https://github.com/jesscosio/dictionary.git```  
 
 make sure python is installed  
