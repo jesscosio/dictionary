@@ -1,5 +1,5 @@
 # dictionary
-Clone project
+Clone project  
 ```git clone https://github.com/jesscosio/dictionary.git```  
 
 make sure python is installed  
