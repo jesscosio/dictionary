@@ -70,7 +70,7 @@ else:
 	rows = cursor.fetchall()
 
 	for r in rows:
-		print("{}\n{}\n".format(r[0],r[1]))
+		print("{} |{}\n{}\n".format(r[0],r[2],r[1]))
 
 
 		
