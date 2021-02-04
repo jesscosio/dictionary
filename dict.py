@@ -4,6 +4,7 @@ import os
 import sys
 import json
 import sqlite3
+from datetime import date
 
 from PyDictionary import PyDictionary
 
@@ -33,8 +34,9 @@ if len(sys.argv) > 1 :
 	if definition != None:
 		conn = sqlite3.connect('VOCAB.db')
 		cursor = conn.cursor()
+		now = date.today()
 		
-		cursor.execute("CREATE TABLE IF NOT EXISTS VOCAB (WORD TEXT primary key, DEF TEXT)")
+		cursor.execute("CREATE TABLE IF NOT EXISTS VOCAB (WORD TEXT primary key, DEF TEXT, DATEADDED DATE)")
 		defs = [(k,v) for k,v in definition.items()]
 		
 		try:	
@@ -44,11 +46,8 @@ if len(sys.argv) > 1 :
 				defstr += str(d[0]) + ", " + str(d[1])
 			defstr = defstr.replace('"', "'")
 
-			# store definition in db
-			qs = "INSERT INTO VOCAB (WORD,DEF) VALUES ("+ json.dumps(word) + "," + json.dumps(defstr) + ")"
-			
-			# execute and commit query
-			conn.execute(qs)
+			# store definition in db, execute and commit query
+			conn.execute("INSERT INTO VOCAB (WORD,DEF,DATEADDED) VALUES (?,?,?)", (json.dumps(word) , json.dumps(defstr),now))
 			conn.commit()
 			
 			# print searched word
